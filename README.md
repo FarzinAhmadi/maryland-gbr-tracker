@@ -1,6 +1,6 @@
-# Maryland Hospital Global Budget Revenue Tracker (site)
+# Maryland Hospital Global Budget Revenue Tracker
 
-This repository publishes one page: a tracker of Maryland's all-payer hospital
+This repository publishes the tracker of Maryland's all-payer hospital
 global budget system, compiled from Health Services Cost Review Commission
 (HSCRC) filings.
 
