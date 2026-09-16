@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: Maryland Hospital Global Budget Revenue Tracker
+message: >-
+  If you use figures from this page, please cite the underlying dataset
+  (maryland-hospital-data) rather than the page.
+type: software
+authors:
+  - family-names: Ahmadi
+    given-names: Farzin
+    affiliation: Towson University
+    email: fahmadi@towson.edu
+    orcid: https://orcid.org/0000-0002-0606-1707
+repository-code: https://github.com/farzinahmadi/maryland-gbr-tracker
+url: https://farzinahmadi.github.io/maryland-gbr-tracker/
+license: MIT
+abstract: >-
+  A public tracker of Maryland's all-payer hospital global budget system,
+  compiled from Health Services Cost Review Commission filings. Covers regulated
+  revenue, admissions, payer mix and financial margins for the hospitals
+  reporting under global budgets, with a hospital map, a plain-language primer
+  on how global budgets work, and links to the compiled open dataset.
+keywords:
+  - Maryland
+  - global budget revenue
+  - all-payer model
+  - hospital finance
+  - health policy
+  - HSCRC
