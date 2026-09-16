@@ -293,6 +293,12 @@ button.ghost:hover{border-color:var(--ink);background:rgba(127,127,127,.07)}
 .colkey .meth{font-size:.72rem}
 .nakey{display:inline-flex;align-items:center;gap:5px}
 .nakey i{width:12px;height:9px;display:block;background:var(--rule-2);border:1px solid var(--rule)}
+/* The global svg rule below sets width:100%, which is right for the map and the
+   charts and wrong for these three fixed-size legend bubbles: as flex items they
+   stretch to the row and the viewBox scales the circle up with them. WebKit only
+   settles them on a second layout pass, so they render huge until a reload. Pin
+   the size here and again inline when they are built. */
+#sizekey svg{width:auto;height:auto;flex:0 0 auto}
 #sizekey svg circle{fill:var(--ramp3)}
 #sp .ser{stroke:var(--s1)} #sp circle{fill:var(--s1)}
 .detail{border:0;border-top:1.4px solid var(--ink);background:transparent;
@@ -570,8 +576,7 @@ footer p{color:var(--chrome-ink-2);max-width:80ch}
     <span><span class="t">Data repository.</span> Every figure on this page is generated from the
       published dataset. Source code, tables and release history are held in the project
       repository.</span>
-    <span><a href="https://github.com/farzinahmadi/maryland-hospital-data"><code>github.com/farzinahmadi/maryland-hospital-data</code></a>
-      <span class="tiny">(placeholder until first release)</span></span>
+    <span><a href="https://github.com/farzinahmadi/maryland-hospital-data"><code>github.com/farzinahmadi/maryland-hospital-data</code></a></span>
   </div>
 </div></section>
 
@@ -1103,7 +1108,9 @@ function buildMap(){
   const sk=$('#sizekey'); sk.innerHTML='';
   const lbl=document.createElement('span'); lbl.textContent='Revenue'; sk.appendChild(lbl);
   [100,1000,3000].forEach(v=>{const r=Math.max(2.6,23*Math.sqrt(v/revmax))*.6;
-    const s=el('svg',{viewBox:`0 0 ${r*2+3} ${r*2+3}`,width:r*2+3,height:r*2+3});
+    const d=r*2+3;
+    const s=el('svg',{viewBox:`0 0 ${d} ${d}`,width:d,height:d});
+    s.style.cssText=`width:${d}px;height:${d}px;flex:0 0 auto`;
     s.appendChild(el('circle',{cx:r+1.5,cy:r+1.5,r:r}));
     const w=document.createElement('span');
     w.style.cssText='display:flex;align-items:center;gap:4px';
