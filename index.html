@@ -13,54 +13,47 @@
 <meta property="og:url" content="https://farzinahmadi.github.io/maryland-gbr-tracker/">
 <meta name="twitter:card" content="summary">
 <title>Maryland Hospital Global Budget Revenue Tracker</title>
-<style>/* Typefaces: Georgia and Arial, per the Towson University Brand Toolkit substitutes for Proxima Nova and Kandal. */
+<style>/* Typeface: Arial, the Towson University Brand Toolkit substitute for Proxima Nova. One face throughout. */
 
 :root{
-  color-scheme:light;
+  /* The page is light only. There is no dark theme and no automatic switch:
+     one appearance, so a screenshot, a print and a screen all agree. */
+  color-scheme:light only;
   --page:#ffffff; --panel:#ffffff; --rule:#e2e2df; --rule-2:#b9b9b4;
   --ink:#15171c; --ink-2:#33363d; --ink-3:#6b6e76;
   --chrome:#171a21; --chrome-ink:#f2f0ea; --chrome-ink-2:#a7a99f;
   --accent:#8c6d23; --accent-soft:#efe9d9;
+  /* Two golds. --accent is the readable one, used wherever gold carries text or a
+     thin mark. --accent-bright is Towson's own gold, used only for chrome that
+     never has to be read: the masthead rule and the active tab underline. */
+  --accent-bright:#ffb500;
+  /* The uniform hospital mark. Black on white rather than blue on grey. */
+  --mark:#40372c;
   /* Colour is spent on marks, never on type. Two hues only: a deep slate blue
      carries the primary series and the map's sequential ramp, a muted ochre
      carries the contrasting one. Blue against ochre is the safest pair under
      every common colour vision deficiency and it separates in greyscale, which
      a blue/orange/green triad does not. */
-  --s1:#2b566e; --s2:#a1732b; --s3:#aebec6;
-  --ramp0:#cbdfea; --ramp1:#a4c6d9; --ramp2:#77a5bf; --ramp3:#4b7f9e; --ramp4:#2b566e;
-  --land:#f1f1ef; --land-line:#dadad6; --land-on:#e7e7e3;
-  /* Towson's brand typefaces are Proxima Nova and Kandal, both commercial
-     Mark Simonson faces distributed to staff through an authenticated download
-     and not licensed for embedding in a public page. The Brand Toolkit names
-     Georgia and Arial as the substitutes wherever the brand faces cannot be
-     used, so those are what this page sets: Georgia for the text, Arial for
-     the apparatus. Swap the first entry in each stack once TU confirms a web
-     licence. */
-  --serif:Georgia,"Iowan Old Style","Times New Roman",Times,serif;
+  --s1:#b7791f; --s2:#9b2c2c; --s3:#6a4e9c;
+  --ramp0:#d0ac60; --ramp1:#b8923c; --ramp2:#9a7622; --ramp3:#755914; --ramp4:#503b0b;
+  /* The state is white with a gold hairline mesh, not a grey fill. Gold is the
+     accent; it must stay recessive against the black marks. */
+  --land:#faf6ed; --land-line:#d3ba8a; --land-on:#f1e6cd;
+  /* When Color by is on, the marks are a gold ramp and a gold mesh would sit in
+     the same hue family as the lightest class. The mesh steps back to warm grey
+     for as long as a metric is selected. */
+  --land-line-neutral:#ded8c8;
+  /* ONE text face for the whole page. Towson's brand typefaces are Proxima Nova
+     and Kandal, both commercial Mark Simonson faces distributed to staff through
+     an authenticated download and not licensed for embedding in a public page;
+     the Brand Toolkit names Arial as the substitute. There is deliberately no
+     second face and no second font token: headings, running text, the figures,
+     the table and the controls are all set in this one stack, so nothing can
+     drift apart. Swap the first entry once TU confirms a web licence. */
   --sans:Arial,"Helvetica Neue",Helvetica,sans-serif;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  color-scheme:dark;
-  --page:#101115; --panel:#15161b; --rule:#2b2d34; --rule-2:#43464f;
-  --ink:#f0eee8; --ink-2:#bcbdb6; --ink-3:#8d8f89;
-  --chrome:#0e1015; --chrome-ink:#f2f0ea; --chrome-ink-2:#9b9d95;
-  --accent:#c6a44f; --accent-soft:#282217;
-  --s1:#8dbdd7; --s2:#d6a751; --s3:#5f7481;
-  --ramp0:#2a3b47; --ramp1:#37596c; --ramp2:#4c7e97; --ramp3:#6ba3bd; --ramp4:#9dcbe0;
-  --land:#23252b; --land-line:#34373f; --land-on:#2c2f36;
-}}
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --page:#101115; --panel:#15161b; --rule:#2b2d34; --rule-2:#43464f;
-  --ink:#f0eee8; --ink-2:#bcbdb6; --ink-3:#8d8f89;
-  --chrome:#0e1015; --chrome-ink:#f2f0ea; --chrome-ink-2:#9b9d95;
-  --accent:#c6a44f; --accent-soft:#282217;
-  --s1:#8dbdd7; --s2:#d6a751; --s3:#5f7481;
-  --ramp0:#2a3b47; --ramp1:#37596c; --ramp2:#4c7e97; --ramp3:#6ba3bd; --ramp4:#9dcbe0;
-  --land:#23252b; --land-line:#34373f; --land-on:#2c2f36;
-}
 *{box-sizing:border-box}
-body{margin:0;background:var(--page);color:var(--ink);font:16.8px/1.56 var(--serif);
+body{margin:0;background:var(--page);color:var(--ink);font:16.2px/1.58 var(--sans);
   -webkit-font-smoothing:antialiased;font-feature-settings:'kern' 1}
 /* Lining, tabular figures wherever numbers are compared down a column. */
 table,.kv,.qrow,.detail{font-variant-numeric:tabular-nums;
@@ -70,7 +63,7 @@ a{color:var(--ink);text-underline-offset:2px;text-decoration-color:var(--rule-2)
 a:hover{text-decoration-color:var(--accent)}
 :root{--measure:68ch}
 p{margin:0 0 13px;max-width:var(--measure);color:var(--ink)}
-h1,h2,h3,h4{font-family:var(--serif);font-weight:700;color:var(--ink);letter-spacing:-.012em}
+h1,h2,h3,h4{font-family:var(--sans);font-weight:700;color:var(--ink);letter-spacing:-.012em}
 h2{font-size:1.52rem;line-height:1.22;margin:0 0 4px}
 h3{font-size:1.12rem;margin:0 0 5px}
 .small{font-size:.92rem} .tiny{font-size:.84rem;color:var(--ink-2);line-height:1.52}
@@ -78,7 +71,7 @@ h3{font-size:1.12rem;margin:0 0 5px}
 #count{font-size:.8rem;color:var(--ink);font-weight:600}
 /* A filename in running text is set in italic, as in a paper. A monospace
    face here says terminal, and this is not a terminal. */
-code{font:italic 1em var(--serif);color:var(--ink-2)}
+code{font:italic 1em var(--sans);color:var(--ink-2)}
 
 /* Masthead. A report identifies itself with a title, a rule and a date, set on
    the page. The full bleed dark band with reversed type is a website hero, and
@@ -91,36 +84,51 @@ code{font:italic 1em var(--serif);color:var(--ink-2)}
   letter-spacing:-.018em;line-height:1.12}
 .mast .upd{grid-column:2;grid-row:1;justify-self:end;white-space:nowrap;
   font-family:var(--sans);font-size:.8rem;color:var(--ink-3)}
-.mast .sub{grid-column:1;font-size:1.02rem;color:var(--ink);margin:7px 0 0;max-width:64ch}
+/* The standfirst spans the column rather than sitting in a narrow measure beside
+   empty space. Long for reading, but it is three sentences read once. */
+.mast .sub{grid-column:1/-1;font-size:1.02rem;color:var(--ink);margin:9px 0 0;max-width:none}
 @media(max-width:700px){
   .masthead{grid-template-columns:1fr}
   .mast .upd{grid-column:1;grid-row:auto;justify-self:start;margin-top:8px}
 }
-.tabs{display:flex;gap:30px;margin:0;width:100%}
-.tabs button{appearance:none;background:none;border:0;border-bottom:2px solid transparent;
-  color:var(--ink-3);font:600 .95rem/1 var(--sans);letter-spacing:.01em;
-  padding:13px 0 12px;cursor:pointer;margin-bottom:-1px;border-radius:0}
-.tabs button:hover{color:var(--ink)}
-.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+/* Four equal tabs across the full width, with rules between them and a gold
+   underline plus a faint gold field on the active one. The earlier version was a
+   row of small grey words and read as a caption rather than as navigation. */
+.tabs{display:flex;gap:0;margin:0;width:100%;border-bottom:1px solid var(--rule)}
+.tabs button{flex:1 1 0;appearance:none;background:none;border:0;
+  border-bottom:3px solid transparent;color:var(--ink-2);
+  font:700 1rem/1 var(--sans);letter-spacing:.01em;text-align:center;
+  padding:16px 8px 14px;cursor:pointer;margin-bottom:-1px;border-radius:0}
+.tabs button+button{border-left:1px solid var(--rule)}
+.tabs button:hover{color:var(--ink);background:var(--accent-soft)}
+.tabs button[aria-selected="true"]{color:var(--ink);
+  border-bottom-color:var(--accent-bright);background:var(--land-on)}
 .tabs button:focus-visible{outline:1.5px solid var(--ink);outline-offset:3px}
 /* Four tabs at full padding overrun a 400px phone by a few pixels, which turns
    the whole page into a horizontal scroller. Tighten them rather than wrap: a
    wrapped tab bar reads as two rows of navigation. */
-@media(max-width:460px){.tabs{gap:19px}.tabs button{font-size:.9rem}}
-@media(max-width:360px){.tabs{gap:13px}.tabs button{font-size:.86rem}}
+@media(max-width:460px){.tabs button{font-size:.88rem;padding:13px 4px 11px}}
+@media(max-width:360px){.tabs button{font-size:.8rem;padding:12px 2px 10px}}
 
 /* Summary quantities. Set as a ruled table of figures rather than four cards
    with oversized numerals: the reader is meant to compare them, and a card
    grid asks to be admired instead. Label reads first, value second. */
 .keywrap{background:transparent}
+/* No top rule: the tab bar already draws one directly above, and two rules a
+   blank band apart read as an empty row. */
 .keyfig{display:grid;grid-template-columns:repeat(4,1fr);
-  border-top:.8px solid var(--rule-2);border-bottom:1.4px solid var(--ink);
+  border-bottom:1px solid var(--rule-2);
   background:transparent;margin:0}
 .keyfig>div{padding:14px 34px 15px 0;border:0}
-.keyfig .l{font-size:.82rem;color:var(--ink-2);line-height:1.38;margin-bottom:5px;
-  max-width:26ch}
-.keyfig .n{font-family:var(--serif);font-size:1.5rem;line-height:1.05;font-weight:600;
-  letter-spacing:-.012em}
+/* The label is set with its figure, so the strip reads as one component. */
+.keyfig .l{font-family:var(--sans);font-size:.8rem;color:var(--ink-2);line-height:1.4;
+  margin-bottom:6px;max-width:26ch}
+/* The headline figures use the same face as the table and the hospital record,
+   so every number on the page is set the same way. Lining tabular figures, so a
+   column of them aligns and a digit is the same width wherever it appears. */
+.keyfig .n{font-family:var(--sans);font-size:1.46rem;line-height:1.08;font-weight:700;
+  letter-spacing:-.021em;font-variant-numeric:tabular-nums;
+  font-feature-settings:'tnum' 1,'kern' 1}
 @media(max-width:860px){.keyfig{grid-template-columns:repeat(2,1fr);gap:4px 24px}}
 @media(max-width:620px){.keyfig{grid-template-columns:1fr;gap:0}
   .keyfig>div{display:flex;justify-content:space-between;align-items:baseline;
@@ -133,7 +141,7 @@ section+section{border-top:1px solid var(--rule)}
 /* Section label in the text face, not letterspaced capitals in an accent
    colour. The capitals read as product marketing; a short italic standfirst
    reads as a report. */
-.kicker{font:400 italic .92rem/1.4 var(--serif);letter-spacing:0;text-transform:none;
+.kicker{font:400 italic .92rem/1.4 var(--sans);letter-spacing:0;text-transform:none;
   color:var(--ink-2);margin:0 0 6px}
 /* The heading and its standfirst sit side by side so the header block spans the
    same width as the table and map beneath it. Set one under the other at a
@@ -158,7 +166,7 @@ figure{margin:0 0 30px;background:transparent;border:0;border-top:1px solid var(
   padding:14px 0 0}
 .fignum{font:700 .95rem/1.4 var(--sans);letter-spacing:0;text-transform:none;color:var(--ink)}
 .fignum:after{content:"."}
-.figtitle{font-family:var(--serif);font-size:1.02rem;font-weight:600;margin:5px 0 2px}
+.figtitle{font-family:var(--sans);font-size:1.02rem;font-weight:600;margin:5px 0 2px}
 .figsub{font-size:.95rem;color:var(--ink-2);margin-bottom:14px}
 figcaption{font-size:.92rem;color:var(--ink);margin-top:13px;padding-top:12px;
   border-top:1px solid var(--rule);max-width:var(--measure);line-height:1.55}
@@ -187,6 +195,12 @@ svg{display:block;width:100%;height:auto;overflow:visible}
    separates them from the prose without turning them into a shaded widget. */
 .mapbox{background:transparent;border:0;border-top:.8px solid var(--ink-3);
   padding:15px 0 0}
+/* With the section head moved below the map, the map box opens the section. Its
+   own top rule would sit a blank band away from the rule under the key figures,
+   which reads as an empty row. */
+.wrap>.mapbox:first-child{border-top:0;padding-top:0;margin-top:-12px}
+/* The section head, now a summary under the map rather than a preamble above it. */
+.mapbox+.sechead{margin-top:26px;padding-top:20px;border-top:1px solid var(--rule)}
 .ctl{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-bottom:6px}
 .ctl label{font-size:.78rem;color:var(--ink-3);letter-spacing:.02em}
 /* Finding one hospital is the most common thing a reader comes here to do, so
@@ -195,10 +209,10 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .searchrow{margin-bottom:13px}
 .searchrow{margin-bottom:18px}
 .searchrow .fld label{font-size:.86rem;color:var(--ink)}
-.searchrow input[type=search]{font-family:var(--serif);font-size:1.32rem;
-  padding:9px 2px 10px;border-bottom:1.5px solid var(--ink);line-height:1.25}
+.searchrow input[type=search]{font-family:var(--sans);font-size:1.32rem;
+  padding:9px 2px 10px;border-bottom:1px solid var(--rule-2);line-height:1.25}
 .searchrow input[type=search]::placeholder{color:var(--ink-3);opacity:1}
-.searchrow input[type=search]:focus{padding-bottom:9px;border-bottom-width:2.5px}
+.searchrow input[type=search]:focus{padding-bottom:9px;border-bottom:2px solid var(--ink)}
 .combo li{font-size:.95rem;padding:8px 11px}
 .ctlgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:14px;
   align-items:end;padding-bottom:0;margin-bottom:16px;border:0}
@@ -254,12 +268,17 @@ button.ghost:hover{border-color:var(--ink);background:rgba(127,127,127,.07)}
 #mapsvg{background:transparent;border:0;border-top:.8px solid var(--rule-2);
   border-bottom:.8px solid var(--rule-2);overflow:hidden}
 #mapsvg .county{fill:var(--land);stroke:var(--land-line);stroke-width:.8}
+#mapsvg.bymetric .county{stroke:var(--land-line-neutral)}
 #mapsvg .county.on{fill:var(--land-on)}
-#mapsvg circle.h{fill:var(--ramp3);stroke:var(--panel);stroke-width:1.6;cursor:pointer;
+/* No separation ring. A ring in any colour draws a halo wherever two circles
+   overlap, which is the thing that read worst. Translucent fills let the
+   overlap show through instead, and zooming separates the Baltimore cluster. */
+#mapsvg circle.h{fill:var(--mark);fill-opacity:.75;stroke:none;cursor:pointer;
   vector-effect:non-scaling-stroke;shape-rendering:geometricPrecision}
 #mapsvg circle.h.q0{fill:var(--ramp0)} #mapsvg circle.h.q1{fill:var(--ramp1)}
 #mapsvg circle.h.q2{fill:var(--ramp2)} #mapsvg circle.h.q3{fill:var(--ramp3)}
 #mapsvg circle.h.q4{fill:var(--ramp4)} #mapsvg circle.h.qna{fill:var(--rule-2)}
+#mapsvg circle.h.quni{fill:var(--mark)}
 #mapsvg circle.h:hover{stroke:var(--ink);stroke-width:2.4}
 #mapsvg circle.h.sel{stroke:var(--ink);stroke-width:2.6}
 #mapsvg circle.h.dim{opacity:.1;pointer-events:none}
@@ -278,7 +297,7 @@ button.ghost:hover{border-color:var(--ink);background:rgba(127,127,127,.07)}
 .ctysum{border:1px solid var(--rule);border-left:3px solid var(--accent);
   background:var(--page);padding:11px 14px;margin-top:10px;font-size:.84rem;
   display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline}
-.ctysum b{font-family:var(--serif);font-size:.98rem;margin-right:6px}
+.ctysum b{font-family:var(--sans);font-size:.98rem;margin-right:6px}
 .ctysum span i{font-style:normal;color:var(--ink-2);margin-right:5px}
 .maplegend{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:flex-end;margin-top:10px;
   font-size:.77rem;color:var(--ink-3)}
@@ -299,7 +318,8 @@ button.ghost:hover{border-color:var(--ink);background:rgba(127,127,127,.07)}
    settles them on a second layout pass, so they render huge until a reload. Pin
    the size here and again inline when they are built. */
 #sizekey svg{width:auto;height:auto;flex:0 0 auto}
-#sizekey svg circle{fill:var(--ramp3)}
+/* The size key shows the uniform mark, so it follows --mark, not a ramp step. */
+#sizekey svg circle{fill:var(--mark);fill-opacity:.75}
 #sp .ser{stroke:var(--s1)} #sp circle{fill:var(--s1)}
 .detail{border:0;border-top:1.4px solid var(--ink);background:transparent;
   padding:11px 0 0;font-size:.9rem}
@@ -318,7 +338,7 @@ button.ghost:hover{border-color:var(--ink);background:rgba(127,127,127,.07)}
 .grp{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
   margin:17px 0 6px;padding-bottom:3px;border-bottom:1px solid var(--ink)}
 .grp span{font:600 .84rem/1.3 var(--sans);color:var(--ink)}
-.grp em{font:400 italic .84rem/1.3 var(--serif);color:var(--ink)}
+.grp em{font:400 italic .84rem/1.3 var(--sans);color:var(--ink)}
 .detail .grp:first-of-type{margin-top:13px}
 svg.bud,svg.marg{display:block;width:100%;height:auto;margin-top:7px;overflow:visible}
 svg.bud .rev,svg.marg .rev{fill:none;stroke:var(--s1);stroke-width:1.8;
@@ -462,9 +482,10 @@ footer p{color:var(--chrome-ink-2);max-width:80ch}
   a{text-decoration:none}
 }
 @media(max-width:1080px){.figgrid{grid-template-columns:1fr}}
+/* The key figures have their own breakpoints above, at 860 and 620. A second
+   .keyfig rule here sat later in the sheet and won at every width below 620,
+   which left the phone showing two columns of overlapping label and number. */
 @media(max-width:940px){
-  .keyfig{grid-template-columns:1fr 1fr}
-  .keyfig>div:nth-child(3){border-left:0}
   .maprow,.cols,.gloss{grid-template-columns:1fr}
 }
 </style>
@@ -476,7 +497,7 @@ footer p{color:var(--chrome-ink-2);max-width:80ch}
 <div class="mast"><div class="wrap">
   <div class="masthead">
     <h1>Maryland Hospital Global Budget Revenue Tracker</h1>
-    <div class="upd">Updated 16 September 2026</div>
+    <div class="upd">Updated 18 September 2026</div>
     <p class="sub">Maryland is the only state that caps what each hospital may collect in a
        year. The Health Services Cost Review Commission approves a budget for every hospital
        before the year begins. This tracker follows what each hospital was approved to collect,
@@ -501,17 +522,6 @@ footer p{color:var(--chrome-ink-2);max-width:80ch}
 </div></div></div>
 
 <section><div class="wrap">
-  <div class="sechead">
-    <div>
-  <p class="kicker">Facility level</p>
-  <h2>Hospitals under global budgets, FY2025</h2>
-    </div>
-  <p class="lead">Sixty one hospitals operated under a global budget in
-     FY2025, from $7 million to $3.3 billion each. The ten largest hold 49% of
-     regulated revenue in the state. Of the 53 hospitals whose approved budget HSCRC has
-     published, forty three finished FY2025 within 1% of it.</p>
-  </div>
-
   <div class="mapbox">
     <div class="searchrow">
       <div class="fld combo">
@@ -570,6 +580,17 @@ footer p{color:var(--chrome-ink-2);max-width:80ch}
       </div>
       <div class="detail" id="panel"></div>
     </div>
+  </div>
+
+  <div class="sechead">
+    <div>
+  <p class="kicker">What the map shows</p>
+  <h2>Hospitals under global budgets, FY2025</h2>
+    </div>
+  <p class="lead">Sixty one hospitals operated under a global budget in
+     FY2025, from $7 million to $3.3 billion each. The ten largest hold 49% of
+     regulated revenue in the state. Of the 53 hospitals whose approved budget HSCRC has
+     published, forty three finished FY2025 within 1% of it.</p>
   </div>
 
   <div class="repo">
@@ -869,7 +890,7 @@ footer p{color:var(--chrome-ink-2);max-width:80ch}
     <div><span>Casemix weights and ECMAD</span><b>Annually, by rate year</b></div>
   </div>
   <p class="tiny" style="margin-top:9px">Current holdings: revenue and volume through FY2026
-    (nine months); financial condition through FY2024. Last checked 16 September 2026.</p>
+    (nine months); financial condition through FY2024. Last checked 18 September 2026.</p>
   <h3 style="margin-top:22px">Compiled by</h3>
   <p class="small"><b>Farzin Ahmadi</b>, Assistant Professor of Healthcare Management,
      Towson University.</p>
@@ -881,7 +902,7 @@ footer p{color:var(--chrome-ink-2);max-width:80ch}
 
 <footer><div class="wrap">
   <p><b>Maryland Hospital Global Budget Revenue Tracker.</b> Compiled from Health Services Cost
-     Review Commission filings. Updated 16 September 2026.</p>
+     Review Commission filings. Updated 18 September 2026.</p>
   <p class="tiny" style="color:var(--chrome-ink-2)">Not affiliated with or endorsed by HSCRC.
      Figures derived from published HSCRC and CMS files.</p>
 </div></footer>
@@ -1046,16 +1067,19 @@ const QCLASS=['q0','q1','q2','q3','q4'];
 // presents as "the color coding does not work". Classes also mean a light or
 // dark switch needs no repaint from script.
 function classOf(h){
-  if(!metric) return 'q3';
+  /* Uniform is not a ramp step. It used to borrow q3 because q3 happened to be
+     the mark colour; with a sequential ramp that is no longer true. */
+  if(!metric) return 'quni';
   const v=h[metric];
   if(!fin(v)) return 'qna';
   const b=BREAKS[metric];
   let i=0; while(i<4&&v>b[i])i++; return QCLASS[i];
 }
 function paint(){
+  map.classList.toggle('bymetric', !!metric);
   map.querySelectorAll('circle.h').forEach(c=>{
     const h=byId[c.dataset.id]; if(!h) return;
-    c.classList.remove('q0','q1','q2','q3','q4','qna');
+    c.classList.remove('q0','q1','q2','q3','q4','qna','quni');
     c.classList.add(classOf(h));});
   drawLegend();
 }
@@ -1074,9 +1098,12 @@ function buildMap(){
   G.counties.forEach(c=>{
     const p=el('path',{d:c.d,class:'county'});
     p.dataset.n=c.n;
-    // Clicking a jurisdiction filters to it, so the map is an input as well as
-    // an output. Clicking the one already selected clears the filter.
-    p.addEventListener('click',()=>setCounty(filt.cty===c.n?'':c.n));
+    /* Clicking a jurisdiction filters to it and zooms to it, so the map is an
+       input as well as an output; clicking the one already selected clears it.
+       The handler is NOT on this element: the map takes pointer capture on
+       pointerdown for panning, which retargets the click event to the svg, so a
+       listener here never runs. It is handled in the pointerup below, which
+       records what was under the pointer when the press began. */
     p.addEventListener('mousemove',ev=>{
       const s=ctyStats(c.n);
       showTip(ev,`<b>${esc(c.n)}</b>`+(s?
@@ -1208,12 +1235,12 @@ function apply(){
 function setCounty(v){
   filt.cty=v;
   if(filt.sys&&!Hs.some(h=>h.sys===filt.sys&&(!v||h.cty===v))) filt.sys='';
-  v?fitCounty(v):fitAll();
+  v?fitCounty(v,520):fitAll(520);
   apply();
 }
 function setSystem(v){
   filt.sys=v;
-  if(filt.cty&&!Hs.some(h=>h.cty===filt.cty&&(!v||h.sys===v))){filt.cty='';fitAll();}
+  if(filt.cty&&!Hs.some(h=>h.cty===filt.cty&&(!v||h.sys===v))){filt.cty='';fitAll(520);}
   apply();
 }
 /* view: pan and zoom, marks held at constant screen size */
@@ -1231,14 +1258,38 @@ function scaleMarks(){
     if(h) c.setAttribute('r',(RAD(h)*k).toFixed(3));});
   drawHalo(); drawCtyLabel(); drawScale();
 }
-function fitAll(){setView({x:0,y:0,w:G.w,h:G.h});}
-function fitCounty(name){
-  const c=G.counties.find(c=>c.n===name); if(!c) return fitAll();
+/* Animated view changes. Scale is interpolated geometrically and the centre
+   linearly, which is what makes a zoom feel like one continuous move rather
+   than a slide plus a scale. Anything the user drives directly (wheel, drag)
+   cancels a running animation instead of fighting it. A reader who has asked
+   their system for reduced motion gets the jump, not the tween. */
+const EASE=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const REDUCED=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let animId=null;
+function stopAnim(){if(animId!==null){cancelAnimationFrame(animId);animId=null;}}
+function animateView(t,ms){
+  stopAnim();
+  if(REDUCED||!ms){setView(t);return;}
+  const x0=view.x,y0=view.y,w0=view.w,h0=view.h;
+  const cx0=x0+w0/2, cy0=y0+h0/2, cx1=t.x+t.w/2, cy1=t.y+(t.w/AR)/2;
+  const t0=performance.now();
+  const step=now=>{
+    const q=Math.min(1,(now-t0)/ms), e=EASE(q);
+    const w=w0*Math.pow(t.w/w0,e), h=w/AR;
+    setView({x:cx0+(cx1-cx0)*e-w/2, y:cy0+(cy1-cy0)*e-h/2, w:w, h:h});
+    animId = q<1 ? requestAnimationFrame(step) : null;
+  };
+  animId=requestAnimationFrame(step);
+}
+function fitAll(ms){animateView({x:0,y:0,w:G.w,h:G.h},ms);}
+function fitCounty(name,ms){
+  const c=G.counties.find(c=>c.n===name); if(!c) return fitAll(ms);
   let[x0,y0,x1,y1]=c.bb, w=x1-x0, h=y1-y0, pd=Math.max(26,w*.18);
   w+=pd*2; h+=pd*2; if(w/h>AR) h=w/AR; else w=h*AR;
-  setView({x:(x0+x1)/2-w/2, y:(y0+y1)/2-h/2, w:w, h:h});
+  animateView({x:(x0+x1)/2-w/2, y:(y0+y1)/2-h/2, w:w, h:h},ms);
 }
 function zoomBy(f,cx,cy){
+  stopAnim();
   const w=view.w*f, h=w/AR;
   if(cx==null){cx=view.x+view.w/2; cy=view.y+view.h/2;}
   setView({x:cx-(cx-view.x)*(w/view.w), y:cy-(cy-view.y)*(h/view.h), w:w, h:h});
@@ -1255,13 +1306,25 @@ map.addEventListener('wheel',ev=>{
 let drag=null;
 map.addEventListener('pointerdown',ev=>{
   if(ev.target.classList.contains('h'))return;
-  drag={px:ev.clientX,py:ev.clientY,vx:view.x,vy:view.y};
+  stopAnim();
+  drag={px:ev.clientX,py:ev.clientY,vx:view.x,vy:view.y,moved:0,
+        cty:ev.target.classList.contains('county')?ev.target.dataset.n:null};
   map.setPointerCapture(ev.pointerId); map.style.cursor='grabbing';});
 map.addEventListener('pointermove',ev=>{
   if(!drag)return; const b=map.getBoundingClientRect();
+  drag.moved=Math.max(drag.moved,
+    Math.abs(ev.clientX-drag.px)+Math.abs(ev.clientY-drag.py));
   setView({x:drag.vx-(ev.clientX-drag.px)/b.width*view.w,
            y:drag.vy-(ev.clientY-drag.py)/b.height*view.h, w:view.w, h:view.h});});
-const endDrag=()=>{drag=null; map.style.cursor='grab';};
+/* A press that ends where it began is a click, not a pan. Five pixels of slack,
+   because a mouse moves a little during a click and a finger moves more. */
+const endDrag=ev=>{
+  if(drag){
+    if(drag.moved<5&&drag.cty) setCounty(filt.cty===drag.cty?'':drag.cty);
+    if(ev&&ev.pointerId!==undefined){
+      try{map.releasePointerCapture(ev.pointerId);}catch(e){}}
+  }
+  drag=null; map.style.cursor='grab';};
 map.addEventListener('pointerup',endDrag); map.addEventListener('pointercancel',endDrag);
 map.style.cursor='grab';
 
@@ -1274,9 +1337,9 @@ function select(id,zoom){sel=id; try{history.replaceState(null,'','#h='+id);}cat
 /* Zoom to a hospital's neighbourhood rather than to the point itself: at full
    zoom a single circle carries no geographic information, and the surrounding
    facilities are the reason to look at a map at all. */
-function focusHospital(h){
+function focusHospital(h,ms){
   const w=Math.max(MINW,G.w/6);
-  setView({x:h.x-w/2, y:h.y-(w/AR)/2, w:w, h:w/AR});
+  animateView({x:h.x-w/2, y:h.y-(w/AR)/2, w:w, h:w/AR}, ms===undefined?460:ms);
 }
 function panel(){
   const p=$('#panel');
@@ -1603,21 +1666,18 @@ $('#county').addEventListener('change',e=>setCounty(e.target.value));
 $('#sysfilter').addEventListener('change',e=>setSystem(e.target.value));
 $('#zin').addEventListener('click',()=>zoomBy(1/1.5));
 $('#zout').addEventListener('click',()=>zoomBy(1.5));
-$('#zfit').addEventListener('click',()=>fitAll());
+$('#zfit').addEventListener('click',()=>fitAll(420));
 $('#tq').addEventListener('input',()=>drawTable());
 $('#reset').addEventListener('click',()=>{filt={cty:'',sys:'',q:''};metric='';sel=null;
   $('#q').value='';$('#metric').value='';$('#tq').value='';closeCombo();
   try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
-  paint();fitAll();apply();panel();});
+  paint();fitAll(0);apply();panel();});
 const tabBtns=[...document.querySelectorAll('.tabs button')];
 tabBtns.forEach((b,i)=>b.addEventListener('keydown',e=>{
   const d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0; if(!d)return;
   e.preventDefault(); const n=tabBtns[(i+d+tabBtns.length)%tabBtns.length]; n.focus(); n.click();}));
-buildMap();fitAll();apply();panel();drawCharts();
+buildMap();fitAll(0);apply();panel();drawCharts();
 const hm=location.hash.match(/h=(\d+)/); if(hm&&Hs.some(h=>h.id==hm[1])) select(+hm[1],true);
-/* Circle and legend colors are CSS classes, so a light or dark switch repaints
-   itself. Only the canvas charts, which bake colors into pixels, need redrawing. */
-matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>{drawCharts();});
 </script>
 </body>
 </html>
