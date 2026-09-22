@@ -1,24 +1,24 @@
 cff-version: 1.2.0
-title: Maryland Hospital Global Budget Revenue Tracker
-message: >-
-  If you use figures from this page, please cite the underlying dataset
-  (maryland-hospital-data) rather than the page.
-type: software
+title: Maryland Hospital Global Budget Revenue Dataset
+message: If you use this dataset, please cite it.
+type: dataset
 authors:
   - family-names: Ahmadi
     given-names: Farzin
     affiliation: Towson University
     email: fahmadi@towson.edu
-    orcid: https://orcid.org/0000-0002-0606-1707
-repository-code: https://github.com/farzinahmadi/maryland-gbr-tracker
-url: https://farzinahmadi.github.io/maryland-gbr-tracker/
-license: MIT
+version: 0.1.1
+date-released: 2026-08-19
+license: CC-BY-4.0
 abstract: >-
-  A public tracker of Maryland's all-payer hospital global budget system,
-  compiled from Health Services Cost Review Commission filings. Covers regulated
-  revenue, admissions, payer mix and financial margins for the hospitals
-  reporting under global budgets, with a hospital map, a plain-language primer
-  on how global budgets work, and links to the compiled open dataset.
+  A tidy, versioned, machine-readable compilation of Maryland Health Services
+  Cost Review Commission (HSCRC) public reports on the state's all-payer
+  hospital global budget system. Covers hospital revenue and volume by month,
+  rate center, setting, payer and patient residency for FY2017-FY2026;
+  statewide and hospital-level financial condition for FY2005-FY2024,
+  extracted from PDF; a hospital identity crosswalk linking HSCRC hospital
+  numbers to CMS Certification Numbers and every name variant observed; and a
+  sourced reference table of Maryland hospital rate center codes.
 keywords:
   - Maryland
   - global budget revenue
@@ -26,3 +26,4 @@ keywords:
   - hospital finance
   - health policy
   - HSCRC
+  - AHEAD model
