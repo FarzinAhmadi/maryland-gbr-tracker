@@ -8,6 +8,8 @@ global budget system, compiled from Health Services Cost Review Commission
 
 **Data:** https://github.com/farzinahmadi/maryland-hospital-data
 
+**Dataset DOI:** https://doi.org/10.5281/zenodo.22947752 (cite the dataset, not this page)
+
 ## What is in here
 
 | File | Purpose |
